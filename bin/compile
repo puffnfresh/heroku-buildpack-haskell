@@ -70,6 +70,11 @@ rm $HOME/.cabal/bin/!(cabal|happy)
 mv $HOME/.cabal $CACHE_DIR/cabal
 mv $HOME/.ghc $CACHE_DIR/dotghc
 
+PROJECT=$(awk /Name:/'{print $2}' *.cabal)
+EXEC="./dist/build/$PROJECT/$PROJECT"
+echo "-----> Stripping binary $EXEC"
+strip $EXEC
+
 echo "Cache dir size:"
 du -ms $CACHE_DIR
 echo "Build dir size:"
