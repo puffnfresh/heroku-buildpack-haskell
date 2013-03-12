@@ -70,7 +70,7 @@ rm $HOME/.cabal/bin/!(cabal|happy)
 mv $HOME/.cabal $CACHE_DIR/cabal
 mv $HOME/.ghc $CACHE_DIR/dotghc
 
-PROJECT=$(awk /Name:/'{print $2}' *.cabal)
+PROJECT=$(awk /[nN]ame:/'{print $2}' *.cabal)
 EXEC="./dist/build/$PROJECT/$PROJECT"
 echo "-----> Stripping binary $EXEC"
 strip $EXEC
