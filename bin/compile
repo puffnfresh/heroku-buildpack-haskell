@@ -9,10 +9,12 @@ CACHE_DIR=$2
 
 mkdir -p $CACHE_DIR
 
+BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
+OPT_DIR=$(cd "$BIN_DIR/../opt"; pwd)
+
 if [ ! -e $CACHE_DIR/ghc ]; then
-  GHC_URL="http://s3.amazonaws.com/haskell-heroku-buildpack/ghc.tar.gz"
-  echo "-----> Downloading GHC"
-  curl -# --max-time 120 -L "$GHC_URL" | tar xz -C $CACHE_DIR
+  echo "-----> Extracting GHC"
+  tar xvzf $OPT_DIR/ghc.tar.gz -C $CACHE_DIR
 fi
 
 # Restore GHC registry if available
@@ -26,9 +28,8 @@ if [ -e $CACHE_DIR/cabal ]; then
   rm -rf $HOME/.cabal
   mv $CACHE_DIR/cabal $HOME/.cabal
 elif [ ! -e $HOME/.cabal ]; then
-  CABAL_URL="http://s3.amazonaws.com/haskell-heroku-buildpack/cabal.tar.gz"
-  echo "-----> Downloading Cabal"
-  curl -# --max-time 120 -L "$CABAL_URL" | tar xz -C $HOME
+  echo "-----> Extracting Cabal"
+  tar xvzf $OPT_DIR/cabal.tar.gz -C $HOME  
 fi
 
 mkdir -p $CACHE_DIR/lib
