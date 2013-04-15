@@ -79,3 +79,5 @@ echo "Cache dir size:"
 du -ms $CACHE_DIR
 echo "Build dir size:"
 du -ms $BUILD_DIR
+echo "Binary size:"
+du -ms $EXEC
