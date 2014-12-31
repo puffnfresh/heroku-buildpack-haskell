@@ -42,10 +42,10 @@ ln -s /usr/lib/libgmp.so.3.5.2 $FIXED_HOME/usr/lib/libgmp.so
 export LD_LIBRARY_PATH=$FIXED_HOME/usr/lib
 
 # Set PATH
-export PATH=$FIXED_HOME/ghc/bin:$FIXED_HOME/.cabal/bin$PATH
+export PATH=$FIXED_HOME/ghc/bin:$FIXED_HOME/.cabal/bin:$PATH
 
 echo "-----> Updating Cabal"
-cabal update
+cabal install cabal-install 
 
 echo "-----> Release the hounds! Installing application"
 cd $BUILD_DIR
